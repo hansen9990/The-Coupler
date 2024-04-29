@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coupler Smell Code</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>The Coupler</h1>
+  </header>
+
+  <main>
+    <section>
+      <img src="https://refactoring.guru/images/refactoring/content/smells/feature-envy-01.png" alt="Sample Picture">
+    </section>
+
+    <section1>
+       <h1>Feature Envy</h1>
+      <h2>Reasons for the Problem</h2>
+      <h3>This smell may occur after fields are moved to a data class. If this is the case, you may want to move the operations on data to this class as well.</h3>
+      <!-- <pre>
+        <code>
+          // Your sample code here
+        </code>
+      </pre> -->
+    </section1>
+    <section2>
+        <h2>Treatment</h2>
+        <h3>
+            As a basic rule, if things change at the same time, you should keep them in the same place. Usually data and functions that use this data are changed together (although exceptions are possible).
+        </h3>
+        <h3>
+            -If a method clearly should be moved to another place, use Move Method.</h3>
+            <h3>-If only part of a method accesses the data of another object, use Extract Method to move the part in question.</h3>
+            <h3>
+                 -If a method uses functions from several other classes, first determine which class contains most of the data used. Then place the method in this class along with the other data. Alternatively, use Extract Method to split the method into several parts that can be placed in different places in different classes.
+            </h3>
+           <img src="https://refactoring.guru/images/refactoring/content/smells/feature-envy-02.png" alt="">
+
+        
+    </section2>
+
+    <section3>
+        <h2>Payoff</h2>
+        <h3>-Less code duplication (if the data handling code is put in a central place).</h3>
+        <h3>-Better code organization (methods for handling data are next to the actual data).</h3>
+    </section3>
+  </main>
+  <main>
+    <section>
+      <h1>
+        Innapropriate Intimacy 
+      </h1>
+      <h2>
+        Signs and Symptoms
+      </h2>
+      <h3>
+        One class uses the internal fields and methods of another class.
+      </h3>
+      <img src="https://refactoring.guru/images/refactoring/content/smells/inappropriate-intimacy-01.png" alt="">
+      <h2>
+        Reasons for the Problem
+      </h2>
+      <h3>
+        Keep a close eye on classes that spend too much time together. Good classes should know as little about each other as possible. Such classes are easier to maintain and reuse.
+      </h3>
+      <h2>
+        Treatment
+      </h2>
+      <h3>
+        The simplest solution is to use Move Method and Move Field to move parts of one class to the class in which those parts are used. But this works only if the first class truly doesn’t need these parts.
+      </h3>
+      <h3>
+        Another solution is to use Extract Class and Hide Delegate on the class to make the code relations “official”.
+
+      </h3>
+      <h3>If the classes are mutually interdependent, you should use Change Bidirectional Association to Unidirectional.</h3>
+      <h3>
+        If this “intimacy” is between a subclass and the superclass, consider Replace Delegation with Inheritance.
+      </h3>
+      <img src="https://refactoring.guru/images/refactoring/content/smells/inappropriate-intimacy-03.png" alt="">
+    </section>
+  </main>
+  <main>
+    <h1>
+      Message Chain 
+    </h1>
+    <h2>
+      Signs and Symptoms
+    </h2>
+    <h3>
+      In code you see a series of calls resembling $a->b()->c()->d()
+    </h3>
+    <img src="https://refactoring.guru/images/refactoring/content/smells/message-chains-01.png" alt="">
+    <h2>
+      Reasons for the Problem
+    </h2>
+    <h3>
+      A message chain occurs when a client requests another object, that object requests yet another one, and so on. These chains mean that the client is dependent on navigation along the class structure. Any changes in these relationships require modifying the client.
+    </h3>
+    <h2>
+      Treatment
+    </h2>
+    <h3>
+      To delete a message chain, use Hide Delegate.
+    </h3>
+
+    <h3>
+      Sometimes it’s better to think of why the end object is being used. Perhaps it would make sense to use Extract Method for this functionality and move it to the beginning of the chain, by using Move Method.
+    </h3>
+    
+  </main>
+  <main>
+    <h1>Middle Man</h1>
+    <h2>
+      Signs and Symptoms
+    </h2>
+    <h3>
+      If a class performs only one action, delegating work to another class, why does it exist at all?
+    </h3>
+    <img src="https://refactoring.guru/images/refactoring/content/smells/middle-man-01.png" alt="">
+    <h2>
+      Reasons for the Problem
+    </h2>
+    <h3>
+      This smell can be the result of overzealous elimination of Message Chains.
+
+In other cases, it can be the result of the useful work of a class being gradually moved to other classes. The class remains as an empty shell that doesn’t do anything other than delegate.
+    </h3>
+    <h2>
+      Treatment
+    </h2>
+    <h3>
+      If most of a method’s classes delegate to another class, Remove Middle Man is in order.
+    </h3>
+  </main>
+  <footer>
+    <h1>  </h1>
+    <p>&copy; 2024 Hansen</p>
+  </footer>
+
+</body>
+</html>
